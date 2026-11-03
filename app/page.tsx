@@ -5,6 +5,7 @@ import BeforeAfter from "@/components/BeforeAfter";
 import Steps from "@/components/Steps";
 import Included from "@/components/Included";
 import Pricing from "@/components/Pricing";
+import SuggestionsSection from "@/components/SuggestionsSection";
 import Faq from "@/components/Faq";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
         <Steps />
         <Included />
         <Pricing />
+        <SuggestionsSection />
         <Faq />
         <WaitlistSection />
       </main>

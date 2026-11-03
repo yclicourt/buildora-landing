@@ -4,15 +4,19 @@ Landing de acceso anticipado de **Buildora**, el generador de andamiajes
 (scaffolds) para proyectos fullstack. El primer camino dorado es
 Next.js + NestJS + Prisma + PostgreSQL + Redis + auth + Docker + CI.
 
-La página recoge reservas (waitlist) por email. El copy es honesto:
+La página recoge reservas (waitlist) por email y sugerencias de stacks
+de los devs. El copy es honesto:
 el generador está en desarrollo y el acceso se abre por orden de reserva.
 No hay testimonios ni estadísticas inventadas.
+Buildora es gratis: las plantillas y el generador no tienen precio,
+suscripción ni tarjeta.
 
 ## Stack
 
 - Next.js 16 (App Router, estático) + React 19 + TypeScript estricto
 - Tailwind CSS v4
-- Supabase (tabla `waitlist`, solo para guardar emails)
+- Supabase (tablas `waitlist` y `stack_suggestions`, solo para guardar
+  emails y sugerencias)
 - Vercel Hobby
 
 Diseño Forja v2.1: crema `#FAF7F2`, tinta `#1C1917`, brasa `#EA580C`.
@@ -44,6 +48,12 @@ pnpm typecheck  # tsc --noEmit
    `supabase/migrations/0001_waitlist.sql`. Crea la tabla `waitlist`
    (email único) con Row Level Security y una única política: insertar
    para `anon`. No hay políticas de lectura, actualización ni borrado.
+   Después ejecuta `supabase/migrations/0002_stack_suggestions.sql`.
+   Crea la tabla `stack_suggestions` (stack obligatorio, descripción y
+   email opcionales, sin deduplicación) con Row Level Security y una
+   única política: insertar para `anon`.
+   NO hacen falta variables de entorno nuevas en Vercel: la ruta de
+   sugerencias reutiliza `SUPABASE_URL` y `SUPABASE_ANON_KEY`.
 3. Copia la URL del proyecto y la clave `anon` (pública) desde
    Project Settings → API.
 
@@ -75,5 +85,18 @@ configuran en Vercel (Project → Settings → Environment Variables).
 - `200 { ok: true, already: true }` — el email ya estaba en la lista
   (no es un error: la UI muestra «ya estás en la lista»).
 - `400` — cuerpo o email inválido.
+- `405` — cualquier método distinto de POST.
+- `500` — fallo del servidor, mensaje genérico (sin detalles internos).
+
+## API de sugerencias
+
+`POST /api/suggestions` con
+`{ "stack": "Vue + Laravel", "description": "...", "email": "..." }`
+(`description` y `email` opcionales; el email solo se usa para avisar
+si ese stack se construye). Las sugerencias NO se deduplican: una
+misma sugerencia puede repetirse. Respuestas:
+
+- `200 { ok: true }` — guardada.
+- `400` — cuerpo, stack o email inválido.
 - `405` — cualquier método distinto de POST.
 - `500` — fallo del servidor, mensaje genérico (sin detalles internos).

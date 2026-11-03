@@ -11,11 +11,11 @@ const FAQS = [
   },
   {
     q: "¿Y si mi stack no está entre los caminos?",
-    a: "Los fundadores votan los próximos caminos. Cada camino nuevo se construye primero como app real y probada, y después se convierte en plantilla.",
+    a: "Puedes sugerir tu stack en la sección de sugerencias. Cada camino nuevo se construye primero como app real y probada, y después se convierte en plantilla.",
   },
   {
     q: "¿Cuándo tendré acceso?",
-    a: "Por orden de reserva. Los fundadores reciben su acceso en cuanto su camino está listo, antes que el público general.",
+    a: "Por orden de reserva. Recibirás el aviso en cuanto tu camino esté listo, antes que el público general.",
   },
 ];
 

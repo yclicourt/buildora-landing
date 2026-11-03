@@ -6,6 +6,7 @@ const LINKS = [
   { href: "#demo", label: "Demo" },
   { href: "#incluye", label: "Qué incluye" },
   { href: "#precio", label: "Acceso anticipado" },
+  { href: "#sugerencias", label: "Sugerencias" },
   { href: "#faq", label: "Preguntas" },
 ];
 

@@ -40,8 +40,8 @@ const TREE_2: Line[] = [
   [dim("Se construye primero como app real y probada,")],
   [dim("y después se convierte en plantilla, como el camino 1.")],
   blank,
-  [dim("Los fundadores votan qué camino sigue.")],
-  [dim("Reserva y tu voto cuenta desde el día uno.")],
+  [dim("Sugiere qué camino sigue.")],
+  [dim("Tu sugerencia cuenta desde el día uno.")],
 ];
 
 const IDLE_1: Line[] = [
