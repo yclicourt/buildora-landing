@@ -35,10 +35,12 @@ pnpm start      # sirve el build
 pnpm typecheck  # tsc --noEmit
 ```
 
-## Supabase (proyecto gratis)
+## Supabase (proyecto de CajaYa)
 
-1. Crea un proyecto gratis en Supabase.
-2. En el editor SQL del proyecto, ejecuta el archivo
+1. Se reutiliza el proyecto de CajaYa (el plan gratis solo permite
+   2 proyectos y ambos slots están ocupados). NO se crea un proyecto
+   nuevo y NO se usa el proyecto de WelcomeHome (es de un cliente).
+2. En el editor SQL del proyecto de CajaYa, ejecuta el archivo
    `supabase/migrations/0001_waitlist.sql`. Crea la tabla `waitlist`
    (email único) con Row Level Security y una única política: insertar
    para `anon`. No hay políticas de lectura, actualización ni borrado.
@@ -50,8 +52,8 @@ pnpm typecheck  # tsc --noEmit
 Solo en servidor, nunca con prefijo `NEXT_PUBLIC_`:
 
 ```bash
-SUPABASE_URL=https://tu-proyecto.supabase.co
-SUPABASE_ANON_KEY=tu-clave-anon
+SUPABASE_URL=https://txdnqglttdgdtomuqaje.supabase.co
+SUPABASE_ANON_KEY=tu-clave-anon-del-proyecto-cajaya
 ```
 
 En local van en `.env.local` (ignorado por git). En producción se
