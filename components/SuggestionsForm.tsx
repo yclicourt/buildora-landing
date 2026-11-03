@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-type Status = "idle" | "sending" | "ok" | "error";
+type Status = "idle" | "sending" | "error";
 
 const STACK_MAX = 100;
 const DESCRIPTION_MAX = 500;
@@ -44,7 +44,10 @@ export default function SuggestionsForm() {
       });
       const data = (await res.json()) as { ok?: boolean };
       if (res.ok && data.ok) {
-        setStatus("ok");
+        setStack("");
+        setDescription("");
+        setEmail("");
+        setStatus("idle");
         setMessage("¡Gracias! Tu sugerencia quedó registrada.");
       } else {
         setStatus("error");
@@ -97,11 +100,7 @@ export default function SuggestionsForm() {
         disabled={status === "sending"}
         className="btn btn-ember"
       >
-        {status === "sending"
-          ? "Enviando…"
-          : status === "ok"
-            ? "Sugerencia enviada ✓"
-            : "Enviar sugerencia"}
+        {status === "sending" ? "Enviando…" : "Enviar sugerencia"}
       </button>
       {message && (
         <p
