@@ -36,12 +36,22 @@ const TREE_1: Line[] = [
 const TREE_2: Line[] = [
   [dim("$ buildora generate mi-proyecto --stack react-django")],
   blank,
-  [ember("Este camino todavía está en el horno.")],
-  [dim("Se construye primero como app real y probada,")],
-  [dim("y después se convierte en plantilla, como el camino 1.")],
+  [ok("✔ "), plain("Resolviendo camino dorado: React + Vite + Django")],
+  [ok("✔ "), plain("Generando frontend (React + Vite + Tailwind)")],
+  [ok("✔ "), plain("Generando backend (Django + DRF)")],
+  [ok("✔ "), plain("Auth JWT + cookie httpOnly + ruta protegida")],
+  [ok("✔ "), plain("docker-compose.yml (PostgreSQL + Redis)")],
+  [ok("✔ "), plain(".github/workflows/ci.yml")],
+  [ok("✔ "), plain("README de arranque")],
   blank,
-  [dim("Sugiere qué camino sigue.")],
-  [dim("Tu sugerencia cuenta desde el día uno.")],
+  [ember("mi-proyecto/")],
+  [plain("├── frontend "), dim("# React + Vite")],
+  [plain("├── backend "), dim("# Django")],
+  [plain("├── docker-compose.yml")],
+  [plain("├── .github/workflows/ci.yml")],
+  [plain("└── README.md")],
+  blank,
+  [ok("Listo. "), dim("docker compose up y a construir.")],
 ];
 
 const IDLE_1: Line[] = [
@@ -53,7 +63,7 @@ const IDLE_1: Line[] = [
 const IDLE_2: Line[] = [
   [dim("$ buildora generate mi-proyecto --stack react-django")],
   blank,
-  [ember("Próximamente. "), dim("Pulsa «Generar» para ver el estado.")],
+  [dim("Pulsa «Generar» para ver el andamiaje.")],
 ];
 
 const TONE_CLASS: Record<Tone, string> = {
@@ -152,8 +162,8 @@ export default function Demo() {
         <button
           type="button"
           onClick={() => pickStack(2)}
-          className={`p-[18px_24px] text-left opacity-[0.62] transition-colors hover:bg-[#FFF9F3] ${
-            stack === 2 ? "bg-[#FFF4EC] opacity-100 shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
+          className={`p-[18px_24px] text-left transition-colors hover:bg-[#FFF9F3] ${
+            stack === 2 ? "bg-[#FFF4EC] shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
           }`}
         >
           <b className="block text-[15px]">React + Vite + Django</b>
@@ -166,7 +176,7 @@ export default function Demo() {
               stack === 2 ? "bg-ember text-white" : "bg-[#EDE9E3] text-muted"
             }`}
           >
-            PRÓXIMAMENTE · VOTA POR ESTE CAMINO
+            DISPONIBLE EN ACCESO ANTICIPADO
           </span>
         </button>
       </div>
@@ -190,8 +200,7 @@ export default function Demo() {
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-[#FDFBF7] px-6 py-4">
         <span className="text-[13px] text-muted">
-          El andamiaje incluye estructura hexagonal, auth, Docker Compose y CI
-          en verde.
+          El andamiaje incluye auth, Docker Compose y CI en verde.
         </span>
         <button
           type="button"
@@ -199,7 +208,7 @@ export default function Demo() {
           disabled={busy}
           className="btn btn-ember"
         >
-          {stack === 1 ? "Generar andamiaje →" : "Ver estado →"}
+          Generar andamiaje →
         </button>
       </div>
     </div>

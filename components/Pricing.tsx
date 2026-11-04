@@ -42,7 +42,7 @@ export default function Pricing() {
         </div>
         <div className="rounded-[14px] border-2 border-ember bg-panel p-8 text-center shadow-[0_14px_34px_rgba(234,88,12,0.14)]">
           <span className="text-[11px] font-extrabold tracking-[0.1em] text-ember-dark">
-            CAMINO 2 · PRÓXIMAMENTE
+            CAMINO 2 · DISPONIBLE
           </span>
           <div className="my-2 text-[44px] font-extrabold tracking-[-0.03em]">
             Gratis
@@ -52,17 +52,17 @@ export default function Pricing() {
           </p>
           <ul className="my-[18px] list-none text-left">
             <li className="border-t border-line py-1.5 text-[14.5px] text-muted first:border-t-0">
-              Se construye primero como app real y probada
+              Construido primero como app real y probada
             </li>
             <li className="border-t border-line py-1.5 text-[14.5px] text-muted">
-              Después se convierte en plantilla, como el camino 1
+              Ya convertido en plantilla, como el camino 1
             </li>
             <li className="border-t border-line py-1.5 text-[14.5px] text-muted">
-              La lista te avisa en cuanto esté listo
+              Auth, Docker y CI funcionando desde el primer commit
             </li>
           </ul>
           <a className="btn btn-ember" href="#reserva">
-            Avísame cuando salga
+            Avísame de novedades
           </a>
         </div>
       </div>

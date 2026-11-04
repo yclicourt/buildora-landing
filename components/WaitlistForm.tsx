@@ -78,7 +78,7 @@ export default function WaitlistForm() {
       >
         <option value="all">Todos los caminos</option>
         <option value="path-1">Un camino (Next.js + NestJS)</option>
-        <option value="path-2">Próximamente (React + Django)</option>
+        <option value="path-2">Disponible (React + Django)</option>
         <option value="news">Solo quiero enterarme</option>
       </select>
       <button type="submit" disabled={status === "sending"} className="btn btn-ember">
