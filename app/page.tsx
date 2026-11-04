@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Stacks from "@/components/Stacks";
 import Problem from "@/components/Problem";
 import BeforeAfter from "@/components/BeforeAfter";
 import Steps from "@/components/Steps";
@@ -16,6 +17,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Stacks />
         <Problem />
         <BeforeAfter />
         <Steps />

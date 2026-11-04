@@ -6,6 +6,7 @@ export default function Footer() {
   const { t } = useLanguage();
   const LINKS = [
     { href: "#demo", label: t.footer.linkDemo },
+    { href: "#stacks", label: t.footer.linkStacks },
     { href: "#precio", label: t.footer.linkPricing },
     { href: "#sugerencias", label: t.footer.linkSuggestions },
     { href: "#reserva", label: t.footer.linkReserve },
