@@ -191,6 +191,7 @@ export const es = {
     cards: [
       {
         badge: "CAMINO 1 · DISPONIBLE",
+        initial: "N",
         name: "Next.js + NestJS",
         stack: "Next.js + NestJS + Prisma + PostgreSQL + Redis",
         desc: "Web full-stack con auth JWT, arquitectura hexagonal y CI en verde.",
@@ -198,6 +199,7 @@ export const es = {
       },
       {
         badge: "CAMINO 2 · DISPONIBLE",
+        initial: "R",
         name: "React + Vite + Django",
         stack: "React + Vite + Django + PostgreSQL + Redis",
         desc: "Frontend React con auth por cookie httpOnly y backend Django + DRF con Swagger.",
@@ -205,6 +207,7 @@ export const es = {
       },
       {
         badge: "CAMINO 3 · PRÓXIMAMENTE",
+        initial: "A",
         name: "Angular + Spring Boot",
         stack: "Angular + Spring Boot + PostgreSQL + Redis",
         desc: "El próximo camino: frontend Angular y backend Spring Boot con la misma base de auth, Docker y CI.",
@@ -302,6 +305,11 @@ export const es = {
     linkSuggestions: "Sugerencias",
     linkReserve: "Reserva",
     linkStacks: "Stacks",
+    colStacks: "Stacks",
+    colProduct: "Producto",
+    stack1: "Next.js + NestJS",
+    stack2: "React + Vite + Django",
+    stack3: "Angular + Spring Boot · Próximamente",
     github: "GitHub",
     copyright: "© 2026 Buildora",
     mit: "Las plantillas son gratis y de código abierto (MIT)",
@@ -491,6 +499,7 @@ export const en: Dict = {
     cards: [
       {
         badge: "PATH 1 · AVAILABLE",
+        initial: "N",
         name: "Next.js + NestJS",
         stack: "Next.js + NestJS + Prisma + PostgreSQL + Redis",
         desc: "Full-stack web with JWT auth, hexagonal architecture and green CI.",
@@ -498,6 +507,7 @@ export const en: Dict = {
       },
       {
         badge: "PATH 2 · AVAILABLE",
+        initial: "R",
         name: "React + Vite + Django",
         stack: "React + Vite + Django + PostgreSQL + Redis",
         desc: "React frontend with httpOnly cookie auth and a Django + DRF backend with Swagger.",
@@ -505,6 +515,7 @@ export const en: Dict = {
       },
       {
         badge: "PATH 3 · COMING SOON",
+        initial: "A",
         name: "Angular + Spring Boot",
         stack: "Angular + Spring Boot + PostgreSQL + Redis",
         desc: "The next path: an Angular frontend and a Spring Boot backend on the same auth, Docker and CI base.",
@@ -602,6 +613,11 @@ export const en: Dict = {
     linkSuggestions: "Suggestions",
     linkReserve: "Reserve",
     linkStacks: "Stacks",
+    colStacks: "Stacks",
+    colProduct: "Product",
+    stack1: "Next.js + NestJS",
+    stack2: "React + Vite + Django",
+    stack3: "Angular + Spring Boot · Coming soon",
     github: "GitHub",
     copyright: "© 2026 Buildora",
     mit: "Templates are free and open source (MIT)",

@@ -23,10 +23,17 @@ export default function Stacks() {
         {t.stacks.cards.map((card) => (
           <div
             key={card.name}
-            className="rounded-[14px] border border-line bg-panel p-6 text-left"
+            className="card rounded-[14px] border border-line bg-panel p-6 text-left"
           >
             <span
-              className={`text-[11px] font-extrabold tracking-[0.1em] ${
+              className={`grid h-10 w-10 place-items-center rounded-lg bg-dark text-[17px] font-extrabold ${
+                card.command ? "text-[#FAF7F2]" : "text-[#A8A29E]"
+              }`}
+            >
+              {card.initial}
+            </span>
+            <span
+              className={`mt-4 block text-[11px] font-extrabold tracking-[0.1em] ${
                 card.command ? "text-ember-dark" : "text-muted"
               }`}
             >
