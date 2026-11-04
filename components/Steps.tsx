@@ -1,36 +1,17 @@
-import Reveal from "./Reveal";
+"use client";
 
-const STEPS = [
-  {
-    num: "01",
-    title: "Elige tu stack",
-    text: "El que tu proyecto ya usa. Sin combinaciones infinitas: caminos dorados, probados de verdad.",
-  },
-  {
-    num: "02",
-    title: "Configura lo esencial",
-    text: "Nombre, base de datos, autenticación. Solo lo que cambia entre proyectos.",
-  },
-  {
-    num: "03",
-    title: "Genera",
-    text: "Buildora arma el proyecto completo con su estructura, su Docker y su CI.",
-  },
-  {
-    num: "04",
-    title: "Descarga y arranca",
-    text: "Un ZIP con README de arranque. docker compose up y a construir.",
-  },
-];
+import Reveal from "./Reveal";
+import { useLanguage } from "@/lib/i18n";
 
 export default function Steps() {
+  const { t } = useLanguage();
   return (
     <Reveal className="mx-auto max-w-[1080px] px-6 py-[72px] max-md:py-12">
       <h2 className="mx-auto mb-10 max-w-[680px] text-center text-[clamp(28px,4vw,38px)] leading-[1.15] tracking-[-0.02em]">
-        De la idea al proyecto en 4 pasos.
+        {t.steps.title}
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {STEPS.map((step) => (
+        {t.steps.items.map((step) => (
           <div
             key={step.num}
             className="step rounded-[14px] border border-line bg-panel p-6"

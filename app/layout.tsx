@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Providers from "@/components/Providers";
+import { THEME_SCRIPT } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Buildora — Tu próximo proyecto, sin empezar de cero",
@@ -13,8 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body>{children}</body>
+    // suppressHydrationWarning: el script inline puede añadir la clase
+    // .dark a <html> antes de la hidratación.
+    <html lang="es" suppressHydrationWarning>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

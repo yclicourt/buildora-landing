@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "ok" | "already" | "error";
 
 const EMAIL_MAX = 254;
 
 export default function WaitlistForm() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [interest, setInterest] = useState("all");
   const [status, setStatus] = useState<Status>("idle");
@@ -17,9 +19,7 @@ export default function WaitlistForm() {
     const value = email.trim();
     if (!value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
       setStatus("error");
-      setMessage(
-        "Escribe un email válido para avisarte cuando tu camino esté listo.",
-      );
+      setMessage(t.waitlist.errEmail);
       return;
     }
     setStatus("sending");
@@ -34,22 +34,18 @@ export default function WaitlistForm() {
       if (res.ok && data.ok) {
         if (data.already) {
           setStatus("already");
-          setMessage(
-            "Ya estás en la lista con ese email. Te avisaremos cuando tu camino esté listo.",
-          );
+          setMessage(t.waitlist.already);
         } else {
           setStatus("ok");
-          setMessage(
-            "¡Listo! Estás en la fila de acceso anticipado. Te avisaremos cuando tu camino esté listo.",
-          );
+          setMessage(t.waitlist.ok);
         }
       } else {
         setStatus("error");
-        setMessage("No se pudo guardar tu email. Inténtalo de nuevo.");
+        setMessage(t.waitlist.errSave);
       }
     } catch {
       setStatus("error");
-      setMessage("No se pudo guardar tu email. Inténtalo de nuevo.");
+      setMessage(t.waitlist.errSave);
     }
   }
 
@@ -64,8 +60,8 @@ export default function WaitlistForm() {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="tu@email.com"
-        aria-label="Email"
+        placeholder={t.waitlist.emailPlaceholder}
+        aria-label={t.waitlist.emailAria}
         required
         maxLength={EMAIL_MAX}
         className="h-11 min-w-[260px] flex-1 rounded-[10px] border border-[#44403C] bg-[#292524] px-4 text-[15px] text-[#FAF7F2] outline-none placeholder:text-[#A8A29E] focus:border-ember"
@@ -73,22 +69,26 @@ export default function WaitlistForm() {
       <select
         value={interest}
         onChange={(e) => setInterest(e.target.value)}
-        aria-label="Qué te interesa"
+        aria-label={t.waitlist.interestAria}
         className="h-11 rounded-[10px] border border-[#44403C] bg-[#292524] px-3 text-[15px] text-[#FAF7F2] outline-none focus:border-ember"
       >
-        <option value="all">Todos los caminos</option>
-        <option value="path-1">Un camino (Next.js + NestJS)</option>
-        <option value="path-2">Disponible (React + Django)</option>
-        <option value="news">Solo quiero enterarme</option>
+        <option value="all">{t.waitlist.optAll}</option>
+        <option value="path-1">{t.waitlist.optPath1}</option>
+        <option value="path-2">{t.waitlist.optPath2}</option>
+        <option value="news">{t.waitlist.optNews}</option>
       </select>
       <button type="submit" disabled={status === "sending"} className="btn btn-ember">
-        {status === "sending" ? "Guardando…" : done ? "Reservado ✓" : "Quiero mi acceso →"}
+        {status === "sending"
+          ? t.waitlist.sending
+          : done
+            ? t.waitlist.reserved
+            : t.waitlist.submit}
       </button>
       {message && (
         <p
           role={status === "error" ? "alert" : "status"}
           className={`w-full text-center text-sm ${
-            status === "error" ? "text-[#FCA5A5]" : "text-[#A8A29E]"
+            status === "error" ? "text-wl-err" : "text-wl-msg"
           }`}
         >
           {message}

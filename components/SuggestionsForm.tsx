@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "error";
 
@@ -10,6 +11,7 @@ const EMAIL_MAX = 254;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function SuggestionsForm() {
+  const { t } = useLanguage();
   const [stack, setStack] = useState("");
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
@@ -22,12 +24,12 @@ export default function SuggestionsForm() {
     const emailValue = email.trim();
     if (!stackValue) {
       setStatus("error");
-      setMessage("Escribe el stack que quieres sugerir.");
+      setMessage(t.suggestions.errStack);
       return;
     }
     if (emailValue && !EMAIL_RE.test(emailValue)) {
       setStatus("error");
-      setMessage("Ese email no parece válido. Déjalo vacío o corrígelo.");
+      setMessage(t.suggestions.errEmail);
       return;
     }
     setStatus("sending");
@@ -48,19 +50,19 @@ export default function SuggestionsForm() {
         setDescription("");
         setEmail("");
         setStatus("idle");
-        setMessage("¡Gracias! Tu sugerencia quedó registrada.");
+        setMessage(t.suggestions.ok);
       } else {
         setStatus("error");
-        setMessage("No se pudo guardar tu sugerencia. Inténtalo de nuevo.");
+        setMessage(t.suggestions.errSave);
       }
     } catch {
       setStatus("error");
-      setMessage("No se pudo guardar tu sugerencia. Inténtalo de nuevo.");
+      setMessage(t.suggestions.errSave);
     }
   }
 
   const inputClass =
-    "h-11 w-full rounded-[10px] border border-line bg-white px-4 text-[15px] text-ink outline-none placeholder:text-muted focus:border-ember";
+    "h-11 w-full rounded-[10px] border border-line bg-panel px-4 text-[15px] text-ink outline-none placeholder:text-muted focus:border-ember";
 
   return (
     <form
@@ -71,8 +73,8 @@ export default function SuggestionsForm() {
         type="text"
         value={stack}
         onChange={(e) => setStack(e.target.value)}
-        placeholder="Stack sugerido (ej. Vue + Laravel)"
-        aria-label="Stack sugerido"
+        placeholder={t.suggestions.stackPlaceholder}
+        aria-label={t.suggestions.stackAria}
         required
         maxLength={STACK_MAX}
         className={inputClass}
@@ -80,18 +82,18 @@ export default function SuggestionsForm() {
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Descripción corta (opcional): qué te gustaría generar con ese stack"
-        aria-label="Descripción corta"
+        placeholder={t.suggestions.descPlaceholder}
+        aria-label={t.suggestions.descAria}
         maxLength={DESCRIPTION_MAX}
         rows={3}
-        className="w-full rounded-[10px] border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none placeholder:text-muted focus:border-ember"
+        className="w-full rounded-[10px] border border-line bg-panel px-4 py-3 text-[15px] text-ink outline-none placeholder:text-muted focus:border-ember"
       />
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="tu@email.com (opcional, para avisarte si se construye)"
-        aria-label="Email (opcional)"
+        placeholder={t.suggestions.emailPlaceholder}
+        aria-label={t.suggestions.emailAria}
         maxLength={EMAIL_MAX}
         className={inputClass}
       />
@@ -100,13 +102,13 @@ export default function SuggestionsForm() {
         disabled={status === "sending"}
         className="btn btn-ember"
       >
-        {status === "sending" ? "Enviando…" : "Enviar sugerencia"}
+        {status === "sending" ? t.suggestions.sending : t.suggestions.submit}
       </button>
       {message && (
         <p
           role={status === "error" ? "alert" : "status"}
           className={`w-full text-center text-sm ${
-            status === "error" ? "text-red-600" : "text-muted"
+            status === "error" ? "text-err" : "text-muted"
           }`}
         >
           {message}

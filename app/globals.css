@@ -12,9 +12,45 @@
   --color-gold: #b08d57;
   --color-soft: #fff4ec;
   --color-soft-line: #ffd9c2;
+  /* Tokens para superficies/textos que cambian entre temas. Sus valores
+     en claro son idénticos a los hex que ya usaban los componentes, así
+     que el modo claro queda pixel-igual; .dark los redefine abajo. */
+  --color-strip: #a8a29e;
+  --color-ink-soft: #d6d3d1;
+  --color-tab-hover: #fff9f3;
+  --color-tab-active: #fff4ec;
+  --color-tab-badge: #ede9e3;
+  --color-demo-foot: #fdfbf7;
+  --color-wl-msg: #a8a29e;
+  --color-wl-err: #fca5a5;
+  --color-err: #dc2626;
   --font-sans: ui-sans-system, -apple-system, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* --- Tema oscuro: la tinta pasa a fondo y la crema a texto base.
+   El acento brasa (#EA580C) se mantiene en ambos temas. El terminal de
+   la demo (bg-dark) sigue oscuro en ambos, así que --color-dark no cambia. */
+.dark {
+  color-scheme: dark;
+  --color-cream: #1c1917;
+  --color-ink: #faf7f2;
+  --color-panel: #292524;
+  --color-line: #44403c;
+  --color-muted: #d6d3d1;
+  --color-soft: #292524;
+  --color-soft-line: #57534e;
+  --color-ember-dark: #fb923c;
+  --color-strip: #a8a29e;
+  --color-ink-soft: #57534e;
+  --color-tab-hover: #44403c;
+  --color-tab-active: #44403c;
+  --color-tab-badge: #57534e;
+  --color-demo-foot: #292524;
+  --color-wl-msg: #57534e;
+  --color-wl-err: #dc2626;
+  --color-err: #f87171;
 }
 
 html {

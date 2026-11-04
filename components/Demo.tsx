@@ -1,70 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-
-type Tone = "dim" | "ok" | "ember" | "plain";
-type Segment = { text: string; tone: Tone };
-type Line = Segment[];
-
-const dim = (text: string): Segment => ({ text, tone: "dim" });
-const ok = (text: string): Segment => ({ text, tone: "ok" });
-const ember = (text: string): Segment => ({ text, tone: "ember" });
-const plain = (text: string): Segment => ({ text, tone: "plain" });
-const blank: Line = [];
-
-const TREE_1: Line[] = [
-  [dim("$ buildora generate mi-proyecto --stack next-nest")],
-  blank,
-  [ok("✔ "), plain("Resolviendo camino dorado: Next.js + NestJS")],
-  [ok("✔ "), plain("Generando frontend (Next.js + Tailwind)")],
-  [ok("✔ "), plain("Generando backend (NestJS hexagonal + Prisma)")],
-  [ok("✔ "), plain("Auth JWT + refresh + ruta protegida")],
-  [ok("✔ "), plain("docker-compose.yml (PostgreSQL + Redis)")],
-  [ok("✔ "), plain(".github/workflows/ci.yml")],
-  [ok("✔ "), plain("README de arranque")],
-  blank,
-  [ember("mi-proyecto/")],
-  [plain("├── apps/web "), dim("# Next.js")],
-  [plain("├── apps/api "), dim("# NestJS")],
-  [plain("├── docker-compose.yml")],
-  [plain("├── .github/workflows/ci.yml")],
-  [plain("└── README.md")],
-  blank,
-  [ok("Listo en 47s. "), dim("docker compose up y a construir.")],
-];
-
-const TREE_2: Line[] = [
-  [dim("$ buildora generate mi-proyecto --stack react-django")],
-  blank,
-  [ok("✔ "), plain("Resolviendo camino dorado: React + Vite + Django")],
-  [ok("✔ "), plain("Generando frontend (React + Vite + Tailwind)")],
-  [ok("✔ "), plain("Generando backend (Django + DRF)")],
-  [ok("✔ "), plain("Auth JWT + cookie httpOnly + ruta protegida")],
-  [ok("✔ "), plain("docker-compose.yml (PostgreSQL + Redis)")],
-  [ok("✔ "), plain(".github/workflows/ci.yml")],
-  [ok("✔ "), plain("README de arranque")],
-  blank,
-  [ember("mi-proyecto/")],
-  [plain("├── frontend "), dim("# React + Vite")],
-  [plain("├── backend "), dim("# Django")],
-  [plain("├── docker-compose.yml")],
-  [plain("├── .github/workflows/ci.yml")],
-  [plain("└── README.md")],
-  blank,
-  [ok("Listo. "), dim("docker compose up y a construir.")],
-];
-
-const IDLE_1: Line[] = [
-  [dim("$ buildora generate mi-proyecto --stack next-nest")],
-  blank,
-  [dim("Pulsa «Generar» para ver el andamiaje.")],
-];
-
-const IDLE_2: Line[] = [
-  [dim("$ buildora generate mi-proyecto --stack react-django")],
-  blank,
-  [dim("Pulsa «Generar» para ver el andamiaje.")],
-];
+import { useLanguage } from "@/lib/i18n";
+import type { Tone } from "@/lib/dict";
 
 const TONE_CLASS: Record<Tone, string> = {
   dim: "text-[#8A8580]",
@@ -74,10 +12,12 @@ const TONE_CLASS: Record<Tone, string> = {
 };
 
 export default function Demo() {
+  const { t } = useLanguage();
   const [stack, setStack] = useState<1 | 2>(1);
-  const [lines, setLines] = useState<Line[]>(IDLE_1);
+  const [lines, setLines] = useState(t.demo.idle1);
   const [busy, setBusy] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const busyRef = useRef(false);
 
   const stop = useCallback(() => {
     if (timer.current) {
@@ -90,13 +30,15 @@ export default function Demo() {
     (which: 1 | 2) => {
       if (busy) return;
       setBusy(true);
-      const target = which === 1 ? TREE_1 : TREE_2;
+      busyRef.current = true;
+      const target = which === 1 ? t.demo.tree1 : t.demo.tree2;
       setLines([]);
       let i = 0;
       timer.current = setInterval(() => {
         if (i >= target.length) {
           stop();
           setBusy(false);
+          busyRef.current = false;
           return;
         }
         const line = target[i];
@@ -104,23 +46,32 @@ export default function Demo() {
         setLines((prev) => [...prev, line]);
       }, 220);
     },
-    [busy, stop],
+    [busy, stop, t],
   );
 
   const pickStack = useCallback(
     (n: 1 | 2) => {
       if (busy) return;
       setStack(n);
-      setLines(n === 1 ? IDLE_1 : IDLE_2);
+      setLines(n === 1 ? t.demo.idle1 : t.demo.idle2);
     },
-    [busy],
+    [busy, t],
   );
+
+  // Al cambiar de idioma, el terminal vuelve al estado inicial del stack
+  // activo (salvo que esté generando en ese momento).
+  useEffect(() => {
+    if (!busyRef.current) {
+      setLines(stack === 1 ? t.demo.idle1 : t.demo.idle2);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
 
   // Como en la maqueta: genera solo al cargar, a los 900ms.
   useEffect(() => {
-    const t = setTimeout(() => generate(1), 900);
+    const tm = setTimeout(() => generate(1), 900);
     return () => {
-      clearTimeout(t);
+      clearTimeout(tm);
       stop();
     };
     // Solo al montar: el generador inicial es siempre el camino 1.
@@ -130,53 +81,45 @@ export default function Demo() {
   return (
     <div className="mx-auto mt-12 overflow-hidden rounded-2xl border border-line bg-panel text-left shadow-[0_18px_50px_rgba(28,25,23,0.08)]">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-6 py-5">
-        <h2 className="text-lg tracking-[-0.01em]">
-          Elige tu stack. Mira lo que genera.
-        </h2>
-        <span className="text-[13px] text-muted">
-          Demo visual · el generador está en desarrollo
-        </span>
+        <h2 className="text-lg tracking-[-0.01em]">{t.demo.title}</h2>
+        <span className="text-[13px] text-muted">{t.demo.note}</span>
       </div>
 
       <div className="grid grid-cols-1 border-b border-line md:grid-cols-2">
         <button
           type="button"
           onClick={() => pickStack(1)}
-          className={`border-b border-line p-[18px_24px] text-left transition-colors hover:bg-[#FFF9F3] md:border-b-0 md:border-r ${
-            stack === 1 ? "bg-[#FFF4EC] shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
+          className={`border-b border-line p-[18px_24px] text-left transition-colors hover:bg-tab-hover md:border-b-0 md:border-r ${
+            stack === 1 ? "bg-tab-active shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
           }`}
         >
           <b className="block text-[15px]">Next.js + NestJS</b>
-          <small className="text-[13px] text-muted">
-            Prisma · PostgreSQL · Redis · Auth JWT · Docker · CI
-          </small>
+          <small className="text-[13px] text-muted">{t.demo.tab1small}</small>
           <br />
           <span
             className={`mt-2 inline-block rounded-md px-2 py-[3px] text-[11px] font-extrabold tracking-[0.1em] ${
-              stack === 1 ? "bg-ember text-white" : "bg-[#EDE9E3] text-muted"
+              stack === 1 ? "bg-ember text-white" : "bg-tab-badge text-muted"
             }`}
           >
-            DISPONIBLE EN ACCESO ANTICIPADO
+            {t.demo.badge}
           </span>
         </button>
         <button
           type="button"
           onClick={() => pickStack(2)}
-          className={`p-[18px_24px] text-left transition-colors hover:bg-[#FFF9F3] ${
-            stack === 2 ? "bg-[#FFF4EC] shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
+          className={`p-[18px_24px] text-left transition-colors hover:bg-tab-hover ${
+            stack === 2 ? "bg-tab-active shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
           }`}
         >
           <b className="block text-[15px]">React + Vite + Django</b>
-          <small className="text-[13px] text-muted">
-            PostgreSQL · Redis · Auth · Docker · CI
-          </small>
+          <small className="text-[13px] text-muted">{t.demo.tab2small}</small>
           <br />
           <span
             className={`mt-2 inline-block rounded-md px-2 py-[3px] text-[11px] font-extrabold tracking-[0.1em] ${
-              stack === 2 ? "bg-ember text-white" : "bg-[#EDE9E3] text-muted"
+              stack === 2 ? "bg-ember text-white" : "bg-tab-badge text-muted"
             }`}
           >
-            DISPONIBLE EN ACCESO ANTICIPADO
+            {t.demo.badge}
           </span>
         </button>
       </div>
@@ -198,17 +141,15 @@ export default function Demo() {
         {!busy && <span className="term-caret" />}
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-[#FDFBF7] px-6 py-4">
-        <span className="text-[13px] text-muted">
-          El andamiaje incluye auth, Docker Compose y CI en verde.
-        </span>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-demo-foot px-6 py-4">
+        <span className="text-[13px] text-muted">{t.demo.footer}</span>
         <button
           type="button"
           onClick={() => generate(stack)}
           disabled={busy}
           className="btn btn-ember"
         >
-          Generar andamiaje →
+          {t.demo.button}
         </button>
       </div>
     </div>

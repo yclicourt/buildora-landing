@@ -1,16 +1,46 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/lib/i18n";
+import { useTheme } from "@/lib/theme";
 
-const LINKS = [
-  { href: "#demo", label: "Demo" },
-  { href: "#incluye", label: "Qué incluye" },
-  { href: "#precio", label: "Acceso anticipado" },
-  { href: "#sugerencias", label: "Sugerencias" },
-  { href: "#faq", label: "Preguntas" },
-];
+function SunIcon() {
+  return (
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" />
+    </svg>
+  );
+}
 
 export default function Nav() {
+  const { lang, t, setLang } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -20,6 +50,56 @@ export default function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const LINKS = [
+    { href: "#demo", label: t.nav.demo },
+    { href: "#incluye", label: t.nav.includes },
+    { href: "#precio", label: t.nav.pricing },
+    { href: "#sugerencias", label: t.nav.suggestions },
+    { href: "#faq", label: t.nav.faq },
+  ];
+
+  const langToggle = (
+    <div
+      className="flex overflow-hidden rounded-[10px] border border-line"
+      role="group"
+      aria-label="Language"
+    >
+      <button
+        type="button"
+        onClick={() => setLang("es")}
+        aria-label="Español"
+        aria-pressed={lang === "es"}
+        className={`h-10 px-3 text-[13px] font-bold ${
+          lang === "es" ? "bg-ember text-white" : "text-muted hover:text-ink"
+        }`}
+      >
+        ES
+      </button>
+      <button
+        type="button"
+        onClick={() => setLang("en")}
+        aria-label="English"
+        aria-pressed={lang === "en"}
+        className={`h-10 px-3 text-[13px] font-bold ${
+          lang === "en" ? "bg-ember text-white" : "text-muted hover:text-ink"
+        }`}
+      >
+        EN
+      </button>
+    </div>
+  );
+
+  const themeToggle = (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={theme === "dark" ? t.nav.themeLight : t.nav.themeDark}
+      className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-line bg-panel text-ink"
+    >
+      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+    </button>
+  );
 
   return (
     <nav
@@ -49,15 +129,17 @@ export default function Nav() {
           ))}
         </div>
         <div className="flex items-center gap-2">
+          <div className="hidden sm:block">{langToggle}</div>
+          <div className="hidden sm:block">{themeToggle}</div>
           <a href="#precio" className="btn btn-ember btn-sm hidden sm:inline-flex">
-            Reserva tu acceso
+            {t.nav.reserve}
           </a>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={open}
-            className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-line bg-white text-ink md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-line bg-panel text-ink md:hidden"
           >
             <svg
               width="22"
@@ -85,12 +167,16 @@ export default function Nav() {
               {link.label}
             </a>
           ))}
+          <div className="flex items-center gap-2 py-2">
+            {langToggle}
+            {themeToggle}
+          </div>
           <a
             href="#precio"
             onClick={() => setOpen(false)}
             className="btn btn-ember mt-2 w-full"
           >
-            Reserva tu acceso
+            {t.nav.reserve}
           </a>
         </div>
       )}
