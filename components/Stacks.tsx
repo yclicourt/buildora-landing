@@ -18,7 +18,7 @@ export default function Stacks() {
       <div className="mb-4 flex justify-center">
         <SectionIcon name="layers" />
       </div>
-      <p className="mb-3 text-center text-[11px] font-extrabold tracking-[0.14em] text-muted">
+      <p className="mb-3 text-center text-[13px] font-extrabold tracking-[0.12em] text-muted">
         {t.stacks.eyebrow}
       </p>
       <h2 className="mx-auto mb-3.5 max-w-[680px] text-center text-[clamp(28px,4vw,38px)] leading-[1.15] tracking-[-0.02em]">

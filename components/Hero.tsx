@@ -1,10 +1,8 @@
 "use client";
 
 import Demo from "./Demo";
+import Typewriter from "./Typewriter";
 import { useLanguage } from "@/lib/i18n";
-
-const STRIP_TEXT =
-  "Next.js ✦ NestJS ✦ Prisma ✦ PostgreSQL ✦ Redis ✦ Docker ✦ GitHub Actions ✦ JWT Auth ✦ Tailwind ✦ TypeScript ✦ ";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -16,6 +14,7 @@ export default function Hero() {
       <h1 className="hero-anim-title mx-auto my-[22px] text-[clamp(38px,6vw,60px)] leading-[1.05] tracking-[-0.03em]">
         {t.hero.title1}
         <br />
+        <Typewriter items={t.hero.typewriter} />{" "}
         <em className="not-italic text-ember">{t.hero.title2}</em>
       </h1>
       <p className="hero-anim-lead mx-auto mb-7 max-w-[640px] text-[19px] text-muted">
@@ -30,17 +29,6 @@ export default function Hero() {
         </a>
       </div>
       <p className="hero-anim-note mt-4 text-sm text-muted">{t.hero.note}</p>
-
-      <div className="strip mx-auto mt-7" aria-hidden="true">
-        <div className="strip-track">
-          <span className="whitespace-nowrap pr-2 text-[13px] font-bold tracking-[0.12em] text-strip">
-            {STRIP_TEXT}
-          </span>
-          <span className="whitespace-nowrap pr-2 text-[13px] font-bold tracking-[0.12em] text-strip">
-            {STRIP_TEXT}
-          </span>
-        </div>
-      </div>
 
       <div id="demo" className="scroll-mt-20">
         <Demo />

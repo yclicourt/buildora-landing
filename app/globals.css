@@ -178,6 +178,19 @@ body {
   }
 }
 
+/* Cursor del typewriter del hero: barra fina en ember que parpadea. */
+.typewriter-caret {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--color-ember);
+  animation: caret-blink 1.1s steps(2, start) infinite;
+}
+@keyframes caret-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
 /* --- Reveal on scroll + staggered cards --- */
 .reveal {
   opacity: 0;
