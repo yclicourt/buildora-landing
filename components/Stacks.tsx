@@ -5,6 +5,10 @@ import { useLanguage } from "@/lib/i18n";
 
 export default function Stacks() {
   const { t } = useLanguage();
+  // El set se repite dos veces para llenar el ancho y dos mitades idénticas
+  // para que el desplazamiento (-50%) del carrusel sea continuo.
+  const SET = [...t.stacks.cards, ...t.stacks.cards];
+  const TRACK = [...SET, ...SET];
   return (
     <Reveal
       id="stacks"
@@ -19,42 +23,42 @@ export default function Stacks() {
       <p className="mx-auto mb-10 max-w-[620px] text-center text-[17px] text-muted">
         {t.stacks.lead}
       </p>
-      <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-3">
-        {t.stacks.cards.map((card) => (
-          <div
-            key={card.name}
-            className="card rounded-[14px] border border-line bg-panel p-6 text-left"
-          >
-            <span
-              className={`grid h-10 w-10 place-items-center rounded-lg bg-dark text-[17px] font-extrabold ${
-                card.command ? "text-[#FAF7F2]" : "text-[#A8A29E]"
-              }`}
+      <div className="strip" aria-label={t.stacks.eyebrow}>
+        <div className="strip-track">
+          {TRACK.map((card, i) => (
+            <div
+              key={`${card.name}-${i}`}
+              aria-hidden={i >= SET.length}
+              className="mr-4 flex w-[280px] shrink-0 flex-col rounded-[14px] border border-line bg-panel p-5 text-left"
             >
-              {card.initial}
-            </span>
-            <span
-              className={`mt-4 block text-[11px] font-extrabold tracking-[0.1em] ${
-                card.command ? "text-ember-dark" : "text-muted"
-              }`}
-            >
-              {card.badge}
-            </span>
-            <h3 className="my-2 text-[19px] font-extrabold tracking-[-0.01em]">
-              {card.name}
-            </h3>
-            <p className="text-[14px] font-bold text-muted">{card.stack}</p>
-            <p className="mt-2 text-[14.5px] text-muted">{card.desc}</p>
-            {card.command ? (
-              <code className="mt-4 block break-all rounded-lg bg-dark px-3 py-2 font-mono text-[12.5px] leading-[1.6] text-[#EDE9E3]">
-                {card.command}
-              </code>
-            ) : (
-              <a className="btn btn-ghost mt-4" href="#reserva">
-                {t.stacks.path3cta}
-              </a>
-            )}
-          </div>
-        ))}
+              <div className="flex gap-2">
+                {card.icons.map((icon) => (
+                  <span
+                    key={icon}
+                    className="grid h-10 w-10 place-items-center rounded-lg border border-line bg-white p-1.5"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/icons/${icon}.svg`}
+                      alt=""
+                      className="h-full w-full object-contain"
+                    />
+                  </span>
+                ))}
+              </div>
+              <h3 className="mt-3 text-[17px] font-extrabold tracking-[-0.01em]">
+                {card.name}
+              </h3>
+              <span
+                className={`mt-1 text-[11px] font-extrabold tracking-[0.1em] ${
+                  card.available ? "text-ember-dark" : "text-muted"
+                }`}
+              >
+                {card.badge}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
       <p className="mx-auto mt-8 max-w-[620px] text-center text-[15px] text-muted">
         {t.stacks.footnote}
