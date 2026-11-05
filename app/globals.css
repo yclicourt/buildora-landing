@@ -17,6 +17,12 @@
      que el modo claro queda pixel-igual; .dark los redefine abajo. */
   --color-strip: #a8a29e;
   --color-ink-soft: #d6d3d1;
+  /* Superficies oscuras que deben seguir siendo oscuras en modo claro Y
+     distinguirse de la página en modo oscuro (fondo #1c1917): el chip de
+     los iconos de sección y la banda del footer usaban bg-dark (#16130f),
+     que en oscuro se funde con la página. */
+  --color-chip: #16130f;
+  --color-foot: #16130f;
   --color-tab-hover: #fff9f3;
   --color-tab-active: #fff4ec;
   --color-tab-badge: #ede9e3;
@@ -48,8 +54,10 @@
   --color-tab-active: #44403c;
   --color-tab-badge: #57534e;
   --color-demo-foot: #292524;
-  --color-wl-msg: #57534e;
-  --color-wl-err: #dc2626;
+  --color-wl-msg: #a8a29e;
+  --color-wl-err: #fca5a5;
+  --color-chip: #44403c;
+  --color-foot: #292524;
   --color-err: #f87171;
 }
 

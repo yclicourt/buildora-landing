@@ -12,14 +12,14 @@ export default function WaitlistSection() {
       id="reserva"
       className="mx-auto max-w-[1080px] scroll-mt-20 px-6 py-[72px] max-md:py-12"
     >
-      <div className="rounded-[20px] bg-ink px-8 py-14 text-center text-cream">
+      <div className="rounded-[20px] bg-dark px-8 py-14 text-center text-[#FAF7F2]">
         <div className="mb-4 flex justify-center">
           <SectionIcon name="mail" tone="ember" />
         </div>
         <h2 className="mb-3 text-[clamp(28px,4vw,38px)] tracking-[-0.02em]">
           {t.waitlist.title}
         </h2>
-        <p className="mx-auto mb-6 max-w-[560px] text-ink-soft">
+        <p className="mx-auto mb-6 max-w-[560px] text-[#D6D3D1]">
           {t.waitlist.lead}
         </p>
         <WaitlistForm />

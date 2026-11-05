@@ -13,7 +13,7 @@ export default function Footer() {
   ];
   const STACKS = [t.footer.stack1, t.footer.stack2, t.footer.stack3];
   return (
-    <footer className="border-t border-white/10 bg-dark">
+    <footer className="border-t border-white/10 bg-foot">
       <div className="mx-auto grid max-w-[1080px] gap-10 px-6 py-14 md:grid-cols-[1.3fr_1fr_1fr]">
         <div className="max-w-[340px]">
           <a

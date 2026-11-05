@@ -112,8 +112,8 @@ export default function SectionIcon({
   if (!chip) return svg;
   return (
     <span
-      className={`inline-grid h-11 w-11 place-items-center rounded-xl ${
-        tone === "ember" ? "bg-ember text-white" : "bg-dark text-[#FAF7F2]"
+      className={`inline-grid h-11 w-11 place-items-center rounded-xl border border-line ${
+        tone === "ember" ? "bg-ember text-white" : "bg-chip text-[#FAF7F2]"
       }`}
     >
       {svg}

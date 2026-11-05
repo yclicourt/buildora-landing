@@ -28,11 +28,11 @@ export default function BeforeAfter() {
             ))}
           </ul>
         </div>
-        <div className="rounded-[14px] bg-ink p-7 text-cream">
+        <div className="rounded-[14px] bg-dark p-7 text-[#FAF7F2]">
           <h3 className="mb-3 text-lg">{t.beforeAfter.withTitle}</h3>
           <ul>
             {t.beforeAfter.withBuildora.map((item) => (
-              <li key={item} className="mb-2 ml-[18px] text-[15px] text-ink-soft">
+              <li key={item} className="mb-2 ml-[18px] text-[15px] text-[#D6D3D1]">
                 {item}
               </li>
             ))}
