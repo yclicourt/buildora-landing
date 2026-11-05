@@ -2,6 +2,7 @@
 
 import Reveal from "./Reveal";
 import { useLanguage } from "@/lib/i18n";
+import SectionIcon from "./SectionIcon";
 
 export default function Faq() {
   const { t } = useLanguage();
@@ -10,6 +11,9 @@ export default function Faq() {
       id="faq"
       className="mx-auto max-w-[1080px] scroll-mt-20 px-6 py-[72px] max-md:py-12"
     >
+      <div className="mb-4 flex justify-center">
+        <SectionIcon name="help" />
+      </div>
       <h2 className="mx-auto mb-10 max-w-[680px] text-center text-[clamp(28px,4vw,38px)] leading-[1.15] tracking-[-0.02em]">
         {t.faq.title}
       </h2>

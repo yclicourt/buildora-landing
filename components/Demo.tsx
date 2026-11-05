@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
+import SectionIcon from "./SectionIcon";
 import type { Tone } from "@/lib/dict";
 
 const TONE_CLASS: Record<Tone, string> = {
@@ -81,7 +82,10 @@ export default function Demo() {
   return (
     <div className="mx-auto mt-12 overflow-hidden rounded-2xl border border-line bg-panel text-left shadow-[0_18px_50px_rgba(28,25,23,0.08)]">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-6 py-5">
-        <h2 className="text-lg tracking-[-0.01em]">{t.demo.title}</h2>
+        <div className="flex items-center gap-2 text-ember-dark">
+          <SectionIcon name="terminal" chip={false} />
+          <h2 className="text-lg tracking-[-0.01em]">{t.demo.title}</h2>
+        </div>
         <span className="text-[13px] text-muted">{t.demo.note}</span>
       </div>
 

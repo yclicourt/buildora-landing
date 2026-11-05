@@ -2,11 +2,15 @@
 
 import Reveal from "./Reveal";
 import { useLanguage } from "@/lib/i18n";
+import SectionIcon from "./SectionIcon";
 
 export default function BeforeAfter() {
   const { t } = useLanguage();
   return (
     <Reveal className="mx-auto max-w-[1080px] px-6 py-[72px] max-md:py-12">
+      <div className="mb-4 flex justify-center">
+        <SectionIcon name="repeat" />
+      </div>
       <h2 className="mx-auto mb-3.5 max-w-[680px] text-center text-[clamp(28px,4vw,38px)] leading-[1.15] tracking-[-0.02em]">
         {t.beforeAfter.title}
       </h2>

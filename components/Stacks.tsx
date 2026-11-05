@@ -2,6 +2,7 @@
 
 import Reveal from "./Reveal";
 import { useLanguage } from "@/lib/i18n";
+import SectionIcon from "./SectionIcon";
 
 export default function Stacks() {
   const { t } = useLanguage();
@@ -14,6 +15,9 @@ export default function Stacks() {
       id="stacks"
       className="mx-auto max-w-[1080px] scroll-mt-20 px-6 py-[72px] max-md:py-12"
     >
+      <div className="mb-4 flex justify-center">
+        <SectionIcon name="layers" />
+      </div>
       <p className="mb-3 text-center text-[11px] font-extrabold tracking-[0.14em] text-muted">
         {t.stacks.eyebrow}
       </p>

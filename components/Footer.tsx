@@ -29,14 +29,28 @@ export default function Footer() {
             {t.footer.tagline}
           </p>
           <p className="mt-4 text-[14px] text-[#A8A29E]">{t.footer.madeBy}</p>
-          <a
-            href="https://github.com/yclicourt"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-5 inline-flex h-10 items-center rounded-lg border border-white/20 px-4 text-[14px] font-bold text-[#D6D3D1] no-underline hover:border-white/60 hover:text-white"
-          >
-            {t.footer.github} ↗
-          </a>
+          <div className="mt-5 flex gap-3">
+            <a
+              href="https://github.com/yclicourt"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t.footer.github}
+              className="grid h-10 w-10 place-items-center rounded-full bg-white transition hover:opacity-85"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icons/github.svg" alt="" className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/yoancarlos"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t.footer.linkedin}
+              className="grid h-10 w-10 place-items-center rounded-full bg-white transition hover:opacity-85"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icons/linkedin.svg" alt="" className="h-5 w-5" />
+            </a>
+          </div>
         </div>
         <nav aria-label="Stacks">
           <h3 className="mb-4 text-[12px] font-extrabold tracking-[0.14em] text-[#FAF7F2]">
