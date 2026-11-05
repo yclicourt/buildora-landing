@@ -24,6 +24,9 @@ export const es = {
     themeDark: "Cambiar a modo oscuro",
     themeLight: "Cambiar a modo claro",
   },
+  common: {
+    backToTop: "Volver arriba",
+  },
   hero: {
     badge: "ACCESO ANTICIPADO · PRÓXIMAMENTE",
     title1: "Tu próximo proyecto,",
@@ -333,6 +336,9 @@ export const en: Dict = {
     closeMenu: "Close menu",
     themeDark: "Switch to dark mode",
     themeLight: "Switch to light mode",
+  },
+  common: {
+    backToTop: "Back to top",
   },
   hero: {
     badge: "ACCESO ANTICIPADO · PRÓXIMAMENTE",

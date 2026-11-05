@@ -10,6 +10,7 @@ import SuggestionsSection from "@/components/SuggestionsSection";
 import Faq from "@/components/Faq";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <WaitlistSection />
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }
