@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "NestJS",
     "Django",
     "Angular",
-    "Spring Boot",
+    "FastAPI",
     "boilerplate",
     "Docker",
     "CI/CD",
