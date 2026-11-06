@@ -15,7 +15,7 @@ export default function Hero() {
         {t.hero.title1}
         <br />
         <Typewriter items={t.hero.typewriter} />{" "}
-        <em className="not-italic text-ember">{t.hero.title2}</em>
+        <em className="not-italic">{t.hero.title2}</em>
       </h1>
       <p className="hero-anim-lead mx-auto mb-7 max-w-[640px] text-[19px] text-muted">
         {t.hero.lead}

@@ -14,7 +14,7 @@ const TONE_CLASS: Record<Tone, string> = {
 
 export default function Demo() {
   const { t } = useLanguage();
-  const [stack, setStack] = useState<1 | 2>(1);
+  const [stack, setStack] = useState<1 | 2 | 3>(1);
   const [lines, setLines] = useState(t.demo.idle1);
   const [busy, setBusy] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -28,11 +28,12 @@ export default function Demo() {
   }, []);
 
   const generate = useCallback(
-    (which: 1 | 2) => {
+    (which: 1 | 2 | 3) => {
       if (busy) return;
       setBusy(true);
       busyRef.current = true;
-      const target = which === 1 ? t.demo.tree1 : t.demo.tree2;
+      const target =
+        which === 1 ? t.demo.tree1 : which === 2 ? t.demo.tree2 : t.demo.tree3;
       setLines([]);
       let i = 0;
       timer.current = setInterval(() => {
@@ -51,10 +52,10 @@ export default function Demo() {
   );
 
   const pickStack = useCallback(
-    (n: 1 | 2) => {
+    (n: 1 | 2 | 3) => {
       if (busy) return;
       setStack(n);
-      setLines(n === 1 ? t.demo.idle1 : t.demo.idle2);
+      setLines(n === 1 ? t.demo.idle1 : n === 2 ? t.demo.idle2 : t.demo.idle3);
     },
     [busy, t],
   );
@@ -63,7 +64,9 @@ export default function Demo() {
   // activo (salvo que esté generando en ese momento).
   useEffect(() => {
     if (!busyRef.current) {
-      setLines(stack === 1 ? t.demo.idle1 : t.demo.idle2);
+      setLines(
+        stack === 1 ? t.demo.idle1 : stack === 2 ? t.demo.idle2 : t.demo.idle3,
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [t]);
@@ -89,7 +92,7 @@ export default function Demo() {
         <span className="text-[13px] text-muted">{t.demo.note}</span>
       </div>
 
-      <div className="grid grid-cols-1 border-b border-line md:grid-cols-2">
+      <div className="grid grid-cols-1 border-b border-line md:grid-cols-3">
         <button
           type="button"
           onClick={() => pickStack(1)}
@@ -111,7 +114,7 @@ export default function Demo() {
         <button
           type="button"
           onClick={() => pickStack(2)}
-          className={`p-[18px_24px] text-left transition-colors hover:bg-tab-hover ${
+          className={`border-b border-line p-[18px_24px] text-left transition-colors hover:bg-tab-hover md:border-b-0 md:border-r ${
             stack === 2 ? "bg-tab-active shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
           }`}
         >
@@ -121,6 +124,24 @@ export default function Demo() {
           <span
             className={`mt-2 inline-block rounded-md px-2 py-[3px] text-[11px] font-extrabold tracking-[0.1em] ${
               stack === 2 ? "bg-ember text-white" : "bg-tab-badge text-muted"
+            }`}
+          >
+            {t.demo.badge}
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={() => pickStack(3)}
+          className={`p-[18px_24px] text-left transition-colors hover:bg-tab-hover ${
+            stack === 3 ? "bg-tab-active shadow-[inset_0_-3px_0_var(--color-ember)]" : ""
+          }`}
+        >
+          <b className="block text-[15px]">Angular + FastAPI</b>
+          <small className="text-[13px] text-muted">{t.demo.tab3small}</small>
+          <br />
+          <span
+            className={`mt-2 inline-block rounded-md px-2 py-[3px] text-[11px] font-extrabold tracking-[0.1em] ${
+              stack === 3 ? "bg-ember text-white" : "bg-tab-badge text-muted"
             }`}
           >
             {t.demo.badge}

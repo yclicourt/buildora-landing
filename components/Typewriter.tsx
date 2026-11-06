@@ -52,7 +52,9 @@ export default function Typewriter({ items }: { items: string[] }) {
   return (
     <span>
       <span className="sr-only">{items.join(", ")}</span>
-      <span aria-hidden="true">{text}</span>
+      <span aria-hidden="true" className="text-ember">
+        {text}
+      </span>
       {!reduced && (
         <span aria-hidden="true" className="typewriter-caret">
           |
