@@ -75,6 +75,7 @@ export default function WaitlistForm() {
         <option value="all">{t.waitlist.optAll}</option>
         <option value="path-1">{t.waitlist.optPath1}</option>
         <option value="path-2">{t.waitlist.optPath2}</option>
+        <option value="path-3">{t.waitlist.optPath3}</option>
         <option value="news">{t.waitlist.optNews}</option>
       </select>
       <button type="submit" disabled={status === "sending"} className="btn btn-ember">

@@ -4,8 +4,38 @@ import Reveal from "./Reveal";
 import { useLanguage } from "@/lib/i18n";
 import SectionIcon from "./SectionIcon";
 
+const TECH_LABELS: Record<string, string> = {
+  nextjs: "Next.js",
+  nestjs: "NestJS",
+  prisma: "Prisma",
+  postgresql: "PostgreSQL",
+  redis: "Redis",
+  react: "React",
+  vitejs: "Vite",
+  django: "Django",
+  angular: "Angular",
+  fastapi: "FastAPI",
+};
+
 export default function Pricing() {
   const { t } = useLanguage();
+  const paths = [
+    {
+      badge: t.pricing.path1badge,
+      bullets: t.pricing.path1bullets,
+      icons: t.stacks.cards[0].icons,
+    },
+    {
+      badge: t.pricing.path2badge,
+      bullets: t.pricing.path2bullets,
+      icons: t.stacks.cards[1].icons,
+    },
+    {
+      badge: t.pricing.path3badge,
+      bullets: t.pricing.path3bullets,
+      icons: t.stacks.cards[2].icons,
+    },
+  ];
   return (
     <Reveal
       id="precio"
@@ -21,72 +51,51 @@ export default function Pricing() {
         {t.pricing.lead}
       </p>
       <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-3">
-        <div className="rounded-[14px] border border-line bg-panel p-8 text-center">
-          <span className="text-[11px] font-extrabold tracking-[0.1em] text-muted">
-            {t.pricing.path1badge}
-          </span>
-          <div className="my-2 text-[44px] font-extrabold tracking-[-0.03em]">
-            {t.pricing.free}
+        {paths.map((path) => (
+          <div
+            key={path.badge}
+            className="rounded-[14px] border border-line bg-panel p-8 text-center"
+          >
+            <span className="text-[11px] font-extrabold tracking-[0.1em] text-muted">
+              {path.badge}
+            </span>
+            <div className="my-2 text-[44px] font-extrabold tracking-[-0.03em]">
+              {t.pricing.free}
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {path.icons.map((icon) => (
+                <span
+                  key={icon}
+                  className="flex shrink-0 items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-[12.5px] font-semibold"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/icons/${icon}.svg`}
+                    alt=""
+                    className="h-4 w-4 object-contain"
+                  />
+                  {TECH_LABELS[icon] ?? icon}
+                </span>
+              ))}
+            </div>
+            <ul className="my-[18px] list-none text-left">
+              {path.bullets.map((bullet) => (
+                <li
+                  key={bullet}
+                  className="flex gap-2 py-1.5 text-[14.5px] text-muted"
+                >
+                  <span aria-hidden className="font-extrabold text-ember-dark">
+                    ✓
+                  </span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <a className="btn btn-ghost" href="#reserva">
+              {t.pricing.cta}
+            </a>
           </div>
-          <p className="text-[14.5px] text-muted">{t.pricing.path1stack}</p>
-          <ul className="my-[18px] list-none text-left">
-            {t.pricing.path1bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="border-t border-line py-1.5 text-[14.5px] text-muted first:border-t-0"
-              >
-                {bullet}
-              </li>
-            ))}
-          </ul>
-          <a className="btn btn-ghost" href="#reserva">
-            {t.pricing.cta}
-          </a>
-        </div>
-        <div className="rounded-[14px] border border-line bg-panel p-8 text-center">
-          <span className="text-[11px] font-extrabold tracking-[0.1em] text-muted">
-            {t.pricing.path2badge}
-          </span>
-          <div className="my-2 text-[44px] font-extrabold tracking-[-0.03em]">
-            {t.pricing.free}
-          </div>
-          <p className="text-[14.5px] text-muted">{t.pricing.path2stack}</p>
-          <ul className="my-[18px] list-none text-left">
-            {t.pricing.path2bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="border-t border-line py-1.5 text-[14.5px] text-muted first:border-t-0"
-              >
-                {bullet}
-              </li>
-            ))}
-          </ul>
-          <a className="btn btn-ghost" href="#reserva">
-            {t.pricing.cta}
-          </a>
-        </div>
-        <div className="rounded-[14px] border border-line bg-panel p-8 text-center">
-          <span className="text-[11px] font-extrabold tracking-[0.1em] text-muted">
-            {t.pricing.path3badge}
-          </span>
-          <div className="my-2 text-[44px] font-extrabold tracking-[-0.03em]">
-            {t.pricing.free}
-          </div>
-          <p className="text-[14.5px] text-muted">{t.pricing.path3stack}</p>
-          <ul className="my-[18px] list-none text-left">
-            {t.pricing.path3bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="border-t border-line py-1.5 text-[14.5px] text-muted first:border-t-0"
-              >
-                {bullet}
-              </li>
-            ))}
-          </ul>
-          <a className="btn btn-ghost" href="#reserva">
-            {t.pricing.cta}
-          </a>
-        </div>
+        ))}
       </div>
       <div className="mx-auto mt-8 max-w-[1080px] rounded-xl border border-soft-line bg-soft px-6 py-5 text-[15px]">
         <b className="text-ember-dark">{t.pricing.honestyLabel}</b>{" "}
