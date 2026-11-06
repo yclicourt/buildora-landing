@@ -261,6 +261,13 @@ export const es = {
       "Ya convertido en plantilla, como el camino 1",
       "Auth, Docker y CI funcionando desde el primer commit",
     ],
+    path3badge: "CAMINO 3 · DISPONIBLE",
+    path3stack: "Angular + FastAPI + PostgreSQL + Redis",
+    path3bullets: [
+      "Construido primero como app real y probada",
+      "Ya convertido en plantilla, como los caminos 1 y 2",
+      "Auth, Docker y CI funcionando desde el primer commit",
+    ],
     cta: "Avísame de novedades",
     honestyLabel: "Honestidad de fundador:",
     honestyText:
@@ -594,6 +601,13 @@ export const en: Dict = {
     path2bullets: [
       "Built first as a real, tested app",
       "Already converted into a template, like path 1",
+      "Auth, Docker and CI working from the first commit",
+    ],
+    path3badge: "PATH 3 · AVAILABLE",
+    path3stack: "Angular + FastAPI + PostgreSQL + Redis",
+    path3bullets: [
+      "Built first as a real, tested app",
+      "Already converted into a template, like paths 1 and 2",
       "Auth, Docker and CI working from the first commit",
     ],
     cta: "Notify me of news",

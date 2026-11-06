@@ -20,7 +20,7 @@ export default function Pricing() {
       <p className="mx-auto mb-10 max-w-[620px] text-center text-[17px] text-muted">
         {t.pricing.lead}
       </p>
-      <div className="mx-auto grid max-w-[760px] grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-3">
         <div className="rounded-[14px] border border-line bg-panel p-8 text-center">
           <span className="text-[11px] font-extrabold tracking-[0.1em] text-muted">
             {t.pricing.path1badge}
@@ -43,8 +43,8 @@ export default function Pricing() {
             {t.pricing.cta}
           </a>
         </div>
-        <div className="rounded-[14px] border-2 border-ember bg-panel p-8 text-center shadow-[0_14px_34px_rgba(234,88,12,0.14)]">
-          <span className="text-[11px] font-extrabold tracking-[0.1em] text-ember-dark">
+        <div className="rounded-[14px] border border-line bg-panel p-8 text-center">
+          <span className="text-[11px] font-extrabold tracking-[0.1em] text-muted">
             {t.pricing.path2badge}
           </span>
           <div className="my-2 text-[44px] font-extrabold tracking-[-0.03em]">
@@ -61,12 +61,34 @@ export default function Pricing() {
               </li>
             ))}
           </ul>
-          <a className="btn btn-ember" href="#reserva">
+          <a className="btn btn-ghost" href="#reserva">
+            {t.pricing.cta}
+          </a>
+        </div>
+        <div className="rounded-[14px] border border-line bg-panel p-8 text-center">
+          <span className="text-[11px] font-extrabold tracking-[0.1em] text-muted">
+            {t.pricing.path3badge}
+          </span>
+          <div className="my-2 text-[44px] font-extrabold tracking-[-0.03em]">
+            {t.pricing.free}
+          </div>
+          <p className="text-[14.5px] text-muted">{t.pricing.path3stack}</p>
+          <ul className="my-[18px] list-none text-left">
+            {t.pricing.path3bullets.map((bullet) => (
+              <li
+                key={bullet}
+                className="border-t border-line py-1.5 text-[14.5px] text-muted first:border-t-0"
+              >
+                {bullet}
+              </li>
+            ))}
+          </ul>
+          <a className="btn btn-ghost" href="#reserva">
             {t.pricing.cta}
           </a>
         </div>
       </div>
-      <div className="mx-auto mt-8 max-w-[760px] rounded-xl border border-soft-line bg-soft px-6 py-5 text-[15px]">
+      <div className="mx-auto mt-8 max-w-[1080px] rounded-xl border border-soft-line bg-soft px-6 py-5 text-[15px]">
         <b className="text-ember-dark">{t.pricing.honestyLabel}</b>{" "}
         {t.pricing.honestyText}
       </div>
